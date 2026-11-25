@@ -1,8 +1,9 @@
 # House Craft Pros — Verified Trades Directory (Texas MVP)
 
-**Trạng thái:** GO đã chốt (có điều kiện) 24/11/2026. Chưa có code, chưa deploy.
-**Stack đã chốt:** Next.js 14 + TypeScript + Supabase/PostgreSQL + GitHub + Vercel + Cloudflare + GoDaddy (tái dùng FarmDirect — KHÔNG dùng Astro + VPS/Coolify, xem `docs/spec-mvp-texas.md` §2).
-**Còn chờ Owner:** tên miền (đề xuất không dùng subdomain hubercenter).
+**Trạng thái:** GO đã chốt (có điều kiện) 24/11/2026 · Sprint 00 xong 25/11 (spec v2, chờ Owner duyệt). Chưa có code, chưa deploy.
+**Stack đã chốt:** Next.js 16 + TypeScript + Supabase/PostgreSQL + GitHub + Vercel + Cloudflare + GoDaddy (tái dùng logic FarmDirect — KHÔNG dùng Astro + VPS/Coolify, xem `docs/spec-mvp-texas-v2.md` §2).
+**Ngân sách:** $0 chỉ là ngân sách thử nghiệm; ngân sách vận hành thương mại quyết trước khi monetize (Vercel Pro $20/tháng hoặc Cloudflare Pages).
+**Còn chờ Owner:** tên miền (đề xuất không dùng subdomain hubercenter) + duyệt spec v2.
 
 ## Dự án là gì
 
@@ -13,13 +14,15 @@ miễn phí, bấm gọi trực tiếp thợ đã xác minh, không điền form
 - **Nguồn dữ liệu:** TDLR (điện + HVAC) và TSBPE (ống nước) — CSV công khai, cập nhật hàng ngày, miễn phí.
 - **Quy mô Texas:** ~40.150 giấy phép doanh nghiệp còn hiệu lực (điện ~12.320, HVAC ~19.087, ống nước RMP 8.743).
 - **Wedge:** công cụ Verify License (chưa site nào có tool chạy thật) + guide verify — không phải trang danh bạ thành phố.
-- **Stack đã chốt:** Next.js 14 SSR + Supabase + Vercel + Cloudflare + GoDaddy, tái dùng kiến trúc FarmDirect. $0. KHÔNG dùng Astro + VPS/Coolify (xem `docs/spec-mvp-texas.md` §2).
+- **Stack đã chốt:** Next.js 16 SSR + Supabase + Vercel + Cloudflare + GoDaddy, tái dùng logic FarmDirect. $0 chỉ là ngân sách thử nghiệm (xem `docs/spec-mvp-texas-v2.md` §2). KHÔNG dùng Astro + VPS/Coolify.
 
 ## Cấu trúc repo
 
 | Thư mục / File | Nội dung |
 |---|---|
-| `docs/spec-mvp-texas.md` | Spec MVP Texas: quyết định đã chốt, vì sao không dùng Astro + VPS/Coolify, kiến trúc, ETL, tính năng, SEO, kế hoạch 90 ngày, tiêu chí nghiệm thu |
+| `docs/spec-mvp-texas-v2.md` | **Spec v2 (Sprint 00, hiện hành):** Next.js 16, DB 11 bảng, verify 3 trạng thái, ETL lifecycle, hosting $0 thử nghiệm, sitemap index, SEO rules sửa |
+| `docs/spec-mvp-texas.md` | Spec v1 (24/11, SUPERSEDED — giữ để đối chiếu) |
+| `docs/danh-gia-thiet-ke-2026-11-25.md` | Bản review thiết kế 7.3/10 + phụ lục kiểm chứng (Next.js 14 EOL, Vercel Hobby, Supabase Free, Contractor Records) |
 | `docs/dinh-huong-2026-11-24.md` | Báo cáo định hướng: GO có điều kiện, kế hoạch 90 ngày, quyết định cần Owner |
 | `docs/danh-gia-seo-2026-11-24.md` | Đánh giá SEO & traffic ban đầu (tỷ lệ leo top theo loại truy vấn) |
 | `docs/cau-truc-site.md` | Cấu trúc site: URL, loại trang, data model, ETL, schema, sitemap |

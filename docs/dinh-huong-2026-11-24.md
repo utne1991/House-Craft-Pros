@@ -26,7 +26,9 @@
 
 - File CSV nào cũng lẫn giấy phép hết hạn (7–12%) → phải lọc theo ngày hết hạn / trạng thái.
 - API Socrata (data.texas.gov) chỉ có 9 trường, không có SĐT/địa chỉ/thành phố → chỉ dùng đếm số + xác minh, không làm được danh bạ.
-- **Hệ quả:** HVAC là nghề lớn nhất nhưng chỉ làm được trang cấp county từ dữ liệu bang. Trang thành phố + nút gọi trực tiếp chỉ khả thi cho điện + ống nước (~21k hồ sơ). Đây là giới hạn dữ liệu thật, không phải do mình làm thiếu.
+- **Hệ quả:** HVAC là nghề lớn nhất nhưng chỉ làm được trang cấp county từ dữ liệu bang. Trang thành phố + nút gọi trực tiếp chỉ khả thi cho điện + ống nước (~16.700 hồ sơ có SĐT). Đây là giới hạn dữ liệu thật, không phải do mình làm thiếu.
+
+**Đính chính 25/11 (review thiết kế):** ~21.000 là số giấy phép có dữ liệu đầy đủ (điện 12.320 + ống nước 8.743), KHÔNG phải số hồ sơ gọi được trực tiếp — chỉ ~16.700 có SĐT (điện 100% + ống nước ~50%). Và 40.150 giấy phép ≠ 40.150 doanh nghiệp độc lập (1 doanh nghiệp có thể giữ nhiều giấy phép) — phải dedupe theo tên + địa chỉ trong ETL dry-run trước khi chốt số hồ sơ.
 
 **Đính chính 1 điểm trong nghiên cứu đợt 1:** nhóm nghiên cứu báo "licfile.asp không có file thợ điện/HVAC, phải lấy qua API Socrata" — **sai**. Muse đã tải trực tiếp 2 file đó từ licfile.asp (Lteecele.csv 14.067 dòng, ltairref.csv 20.497 dòng). Kênh CSV là chính, điều khoản của nó chính là TDLR Website Policies §D (đã đọc). Socrata chỉ là kênh phụ.
 
@@ -95,3 +97,10 @@
 - Dry-run ETL: số hồ sơ TX thực tế sau lọc business-only; Supabase free tier có đủ không.
 - Luật sư: nhãn "Sponsored" đơn độc; SB 140 có phải đăng ký không; tái xuất bản SĐT cá nhân.
 - Thợ Texas sẵn sàng trả bao nhiêu cho featured placement (cần khảo sát/gọi điện).
+
+## 9. Sprint 00 — Review thiết kế 25/11 (7.3/10) và thay đổi spec
+
+- **Bản review:** `docs/danh-gia-thiet-ke-2026-11-25.md` — 7.3/10, GO có điều kiện. Điểm mạnh nhất: nguồn dữ liệu chính phủ. Điểm yếu nhất: kế hoạch triển khai/nghiệm thu (5/10).
+- **4 claim P0 đã kiểm chứng độc lập (25/11):** Next.js 14 EOL (16 Active LTS, 15 Maintenance tới 31/01/2027); Vercel Hobby cấm dùng thương mại (Pro $20/tháng); Supabase Free 500MB + pause sau 7 ngày không hoạt động, không backup tự động (Pro $25/tháng); Contractor Records là đối thủ thật (TDLR + TSBPE + permit địa phương) — nghiên cứu đợt 1 đã bỏ sót.
+- **Kết quả Sprint 00:** spec v2 (`docs/spec-mvp-texas-v2.md`) — Next.js 16, DB 11 bảng, verify 3 trạng thái, ETL lifecycle + rollback, sitemap index, SEO rules sửa, ngân sách $0 = thử nghiệm (quyết ngân sách thương mại trước khi monetize), định vị dài hạn Homeowner Intelligence Platform, kế hoạch Sprint 00–05, mô hình freemium.
+- **Nghiệm thu Sprint 00: Owner duyệt spec v2** — rồi mới sang Sprint 01 (Data Foundation).

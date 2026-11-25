@@ -1,5 +1,7 @@
 # Spec MVP Texas — House Craft Pros
 
+> **SUPERSEDED — Spec này đã được thay bằng `spec-mvp-texas-v2.md` (Sprint 00, 25/11/2026). Giữ lại để đối chiếu lịch sử, không dùng để build.**
+
 **Ngày:** 24/11/2026 · **Trạng thái:** GO đã chốt (có điều kiện). Chưa có code, chưa deploy.
 **Tài liệu liên quan:** `docs/dinh-huong-2026-11-24.md` (quyết định + số liệu), `docs/cau-truc-site.md` (cấu trúc site), `docs/cay-bai-viet-lien-ket.md` (cây bài viết + 40 từ khóa), `research/` (nghiên cứu đợt 1).
 
