@@ -1,0 +1,9 @@
+# House Craft Pros — never commit PII or raw source data to this repo.
+# Raw TDLR/TSBPE CSVs, staging files, SQL dumps and benchmark outputs
+# (which contain real licensee names/phones/addresses) stay in /tmp.
+etl/bench/out/
+**/target/
+*.dump
+*.tsv
+*.csv
+!etl/tests/fixtures/*.csv

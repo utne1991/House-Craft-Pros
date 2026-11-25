@@ -1,8 +1,8 @@
 # Cây bài viết + Sơ đồ liên kết nội bộ — House Craft Pros (Texas MVP)
 
-**Ngày:** 24/11/2026 · **Nguồn từ khóa:** `research/raw/01-keywords-wedge.md` (40 từ khóa, 30 SERP đọc trực tiếp 24/11/2026).
+**Ngày:** 24/11/2026 · **Đồng bộ với spec v2:** 25/11/2026 · **Nguồn từ khóa:** `research/raw/01-keywords-wedge.md` (40 từ khóa, 30 SERP đọc trực tiếp 24/11/2026).
 **Nguyên tắc:** cây hub-and-spoke — 1 trụ cột verify chung → 3 cụm nghề → thành phố → hồ sơ thợ.
-Mọi trang indexable đều có ≥1 link SSR inbound. Không trang mồ côi.
+Mọi trang indexable đều có ≥1 link SSR inbound. Không trang mồ côi. "Đã xác minh" trong tài liệu này chỉ có nghĩa là giấy phép tra cứu được từ dữ liệu bang — nhãn "Verified" chỉ dùng khi `verification_level = authority-confirmed` (spec v2 §5).
 
 ---
 
@@ -94,14 +94,14 @@ link/hướng dẫn trong các bài khác.
 ### 2.3 Anchor text
 
 - Mô tả đúng nội dung trang đích, đa dạng, không lặp exact-match keyword.
-- VD tốt: "cách verify giấy phép thợ điện ở Texas", "thợ điện đã xác minh ở Dallas",
+- VD tốt: "cách verify giấy phép thợ điện ở Texas", "thợ điện có giấy phép ở Dallas",
   "tra cứu số giấy phép TACL".
 - VD xấu (tránh): mọi link đều là "verify electrician license Texas".
 
 ### 2.4 Không trang mồ côi — checklist trước khi index 1 URL
 
 - [ ] Có ≥1 link SSR inbound từ hub (trang chủ / /texas/ / trang thành phố) hoặc guide
-- [ ] Có trong sitemap (chỉ khi đạt gate đợt index)
+- [ ] Có trong sitemap index (chỉ khi đã qua cổng SEO — riêng với cổng data, xem spec v2 §4)
 - [ ] Có breadcrumb + canonical tự tham chiếu
 - [ ] Có ≥3 link outbound tới trang liên quan (trừ trang hồ sơ mỏng nhất: ≥2)
 
@@ -128,8 +128,8 @@ link/hướng dẫn trong các bài khác.
 | Ngày 31–60 | 10 guide còn lại (TACL, RMP, Q&A, report...) + Dallas/Houston/Austin + 20–30 thành phố nhỏ | #24, #30, #16, #4, #14, #35, #37, #38, #39... |
 | Ngày 61–90 | 10–15 cost guide + hồ sơ thợ lô 2–3 + claim listing | Cost keywords (đợt 2) |
 
-**Gate giữa các đợt:** index batch trước >80% (kiểm tra GSC) + impression tăng đều mới mở đợt sau.
-Nếu index rớt → dừng mở trang mới, sửa chất lượng/link trước.
+**Gate giữa các đợt (kết hợp nhiều tín hiệu — không chỉ index >80%):** index rate của batch trước + impressions + chất lượng dữ liệu + hành vi người dùng (kiểm tra GSC) đều đạt mới mở đợt sau.
+Nếu index rớt → dừng mở trang mới, sửa chất lượng/link trước. Lưu ý hai cổng riêng (spec v2 §4): một URL phải qua cổng data trước (hiển thị được) rồi mới qua cổng SEO (vào sitemap index).
 
 ---
 
