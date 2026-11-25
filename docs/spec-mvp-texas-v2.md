@@ -181,6 +181,37 @@ CSV TDLR không có trường status — trạng thái suy ra từ ngày hết h
 - Hồ sơ thợ (`/contractors/[slug]/`) — index theo lô có gate.
 - Trang tĩnh: About, Sources, Contact, Privacy, Terms, Disclaimer (bắt buộc trước launch), Remove Listing (form noindex).
 
+### 6.2.1 Quy tắc nội dung — triết lý "Sự thật cụ thể bán hàng"
+
+Nguồn đầy đủ: Triết lý Content & Bán hàng "Sự thật cụ thể bán hàng" (25/11/2026) — áp dụng cho mọi website của Bee, không chỉ House Craft Pros. Mục này là bản áp dụng cho danh bạ thợ; không thay thế các hard rule hiện có của repo (xem cuối mục).
+
+- **Một trang — một ý bán chính.** Mỗi trang/bài chỉ hứa một lợi ích trung tâm:
+  - Hồ sơ thợ (`/contractors/[slug]/`) bán "giấy phép đã xác minh + liên hệ được".
+  - Tool `/verify/` bán "tra cứu giấy phép thật, đối chiếu được với .gov".
+  - Guide bán "cách tự kiểm tra thợ trước khi thuê". Trang ôm nhiều hứa hẹn là trang yếu.
+- **Headline là cửa bán hàng.** Title khớp intent tìm kiếm; H1 nêu lợi ích cụ thể (không nêu tên trang chung chung); meta description đưa bằng chứng (vd: số giấy phép + trạng thái + nguồn kiểm chứng).
+- **Chứng minh bằng chi tiết thật, không tính từ chung chung.** Thay "uy tín, chất lượng cao, tốt nhất" bằng: số giấy phép, trạng thái (active/expired/suspended/revoked), ngày xác minh, nguồn TDLR/TSBPE + link "Kiểm tra lại trên trang .gov". Số cụ thể nhưng bịa là cấm tuyệt đối.
+- **Thiếu dữ liệu thì ghi DATA REQUIRED, bỏ câu đó.** Không có sự thật kiểm chứng được thì không viết câu đó — không bịa, không dùng số lẻ giả tạo để tạo cảm giác đã đo lường.
+- **Viết theo mức nhận biết của khách.** Chưa biết vấn đề → kể vấn đề/rủi ro thuê thợ không phép. Biết vấn đề → nêu cơ chế kiểm tra. Biết giải pháp → so sánh bằng chứng (trạng thái giấy phép, ngày xác minh). Sẵn sàng thuê → SĐT, khu vực phục vụ, bước liên hệ rõ ràng.
+- **Không clickbait giữ lại đáp án cốt lõi** — nhất là nội dung YMYL (chứng nhận, thuế, tài chính). Tò mò chỉ được mở bằng một chi tiết thật; phần thân phải trả lời đầy đủ.
+- **Đo bằng hành vi, không bằng ý kiến.** Theo dõi CTR, chuyển đổi (click gọi/liên hệ, lượt tra cứu verify), GSC và khả năng được AI trích dẫn; giữ bản thắng, bỏ bản thua.
+
+**Checklist 8 câu — chạy trước khi đăng (mọi trang/bài/tool):**
+1. Trang này bán một ý chính nào?
+2. Khách đang ở mức nhận biết nào?
+3. Headline có nêu lợi ích cụ thể chưa?
+4. Chi tiết thật làm bằng chứng chính là gì?
+5. Chi tiết đó có nguồn sơ cấp (TDLR/TSBPE) và ngày kiểm chứng chưa?
+6. Có cơ chế/quy trình giải thích vì sao kết quả xảy ra chưa?
+7. Dấu hiệu thương hiệu và đường liên hệ/mua có rõ không?
+8. Sau đăng sẽ đo bằng chỉ số nào, khi nào xem lại?
+
+**Các hard rule hiện có của repo vẫn giữ nguyên — checklist này bổ sung, không thay thế:**
+- Không bịa dữ liệu, không số bịa, không nguồn thứ cấp ẩn danh cho claim YMYL.
+- Không gắn nhãn "Verified" khi chưa đủ bằng chứng thẩm quyền (§5 — tách `license_status` khỏi `verification_level`).
+- Không AggregateRating/Review khi chưa có review thật (§6.4.8).
+- Không commit CSV chứa PII, API key, thông tin xác thực lên GitHub (§6.5).
+
 ### 6.3 Claim listing (`/claim/`, noindex)
 - Form claim: tên người claim, SĐT, quan hệ với doanh nghiệp → xác minh **qua gọi điện tay** (KHÔNG SMS — TCPA + Texas SB 140).
 - Sau xác minh: thợ được cập nhật/gỡ thông tin, tải ảnh thật lên (không dùng ảnh stock giả làm ảnh thợ).
@@ -267,6 +298,7 @@ Lưu ý: cài skill từ repo bên thứ ba phải quét an toàn trước (quy 
 - Đối thủ mới: Contractor Records → nghiên cứu đợt 2 (cùng contractorverify.org, texasrepaircosts.com).
 - Bảo mật: thêm §6.5 (RLS, phân quyền, rate limit, anti-spam, PII, secrets, backup).
 - Doanh thu: thêm mô hình freemium (§9).
+- Nội dung (sau v2, 25/11/2026): thêm §6.2.1 — triết lý "Sự thật cụ thể bán hàng" + checklist 8 câu trước khi đăng (áp dụng cho mọi trang/bài/tool; hard rule cũ giữ nguyên).
 
 **Việc cần duyệt/quyết tiếp theo:**
 1. **Owner duyệt spec v2** (nghiệm thu Sprint 00) — rồi mới sang Sprint 01.
