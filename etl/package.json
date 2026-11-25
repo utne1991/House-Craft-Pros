@@ -1,0 +1,14 @@
+{
+  "description": "House Craft Pros data ingestion engine (Sprint 01). TypeScript, zero dependencies, Node 24. One production ETL engine.",
+  "name": "house-craft-pros-etl",
+  "private": true,
+  "scripts": {
+    "backup": "node src/backup.ts",
+    "crosscheck": "node src/crosscheck.ts",
+    "run": "node src/run.ts",
+    "test": "node --test tests/csv.test.ts tests/normalize.test.ts tests/validate-dedupe-anomaly.test.ts tests/contract.test.ts tests/db.test.ts",
+    "verify": "node src/verify.ts"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
