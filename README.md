@@ -1,7 +1,8 @@
 # House Craft Pros — Verified Trades Directory (Texas MVP)
 
-**Trạng thái:** Nghiên cứu + định hướng xong 24/11/2026. Chưa có code, chưa deploy.
-**Quyết định chờ Owner:** GO / NO-GO cho wedge 90 ngày (xem `docs/dinh-huong-2026-11-24.md`).
+**Trạng thái:** GO đã chốt (có điều kiện) 24/11/2026. Chưa có code, chưa deploy.
+**Stack đã chốt:** Next.js 14 + TypeScript + Supabase/PostgreSQL + GitHub + Vercel + Cloudflare + GoDaddy (tái dùng FarmDirect — KHÔNG dùng Astro + VPS/Coolify, xem `docs/spec-mvp-texas.md` §2).
+**Còn chờ Owner:** tên miền (đề xuất không dùng subdomain hubercenter).
 
 ## Dự án là gì
 
@@ -12,12 +13,13 @@ miễn phí, bấm gọi trực tiếp thợ đã xác minh, không điền form
 - **Nguồn dữ liệu:** TDLR (điện + HVAC) và TSBPE (ống nước) — CSV công khai, cập nhật hàng ngày, miễn phí.
 - **Quy mô Texas:** ~40.150 giấy phép doanh nghiệp còn hiệu lực (điện ~12.320, HVAC ~19.087, ống nước RMP 8.743).
 - **Wedge:** công cụ Verify License (chưa site nào có tool chạy thật) + guide verify — không phải trang danh bạ thành phố.
-- **Stack đề xuất:** Next.js 14 SSR + Supabase + Vercel, tái dùng kiến trúc FarmDirect. $0.
+- **Stack đã chốt:** Next.js 14 SSR + Supabase + Vercel + Cloudflare + GoDaddy, tái dùng kiến trúc FarmDirect. $0. KHÔNG dùng Astro + VPS/Coolify (xem `docs/spec-mvp-texas.md` §2).
 
 ## Cấu trúc repo
 
 | Thư mục / File | Nội dung |
 |---|---|
+| `docs/spec-mvp-texas.md` | Spec MVP Texas: quyết định đã chốt, vì sao không dùng Astro + VPS/Coolify, kiến trúc, ETL, tính năng, SEO, kế hoạch 90 ngày, tiêu chí nghiệm thu |
 | `docs/dinh-huong-2026-11-24.md` | Báo cáo định hướng: GO có điều kiện, kế hoạch 90 ngày, quyết định cần Owner |
 | `docs/danh-gia-seo-2026-11-24.md` | Đánh giá SEO & traffic ban đầu (tỷ lệ leo top theo loại truy vấn) |
 | `docs/cau-truc-site.md` | Cấu trúc site: URL, loại trang, data model, ETL, schema, sitemap |

@@ -81,12 +81,12 @@
 
 ---
 
-## 7. Quyết định cần Owner
+## 7. Quyết định — ĐÃ CHỐT 24/11/2026 (xử lý theo khuyến nghị đã gửi Owner)
 
-1. **GO / NO-GO** cho wedge 90 ngày (đề xuất: GO có điều kiện như trên).
-2. **Texas** (đề xuất) hay California? Texas có CSV + API sẵn; CA dữ liệu sạch nhưng phải tải tay, chưa nghiên cứu CCPA.
-3. **Stack FarmDirect** (đề xuất) hay thử AI Studio? Tái dùng kiến trúc + deploy cần anh Út duyệt.
-4. **Tên miền + repo:** repo anh đang tạo — chốt tên miền riêng cho dự án (đề xuất không dùng subdomain hubercenter để tránh trộn thương hiệu thuế).
+1. **GO CÓ ĐIỀU KIỆN** cho wedge 90 ngày — điều kiện ở đầu báo cáo (bắt đầu bằng tool verify + guide, đo index thật 90 ngày rồi mới scale; không SMS; không kỳ vọng doanh thu trước tháng 9; dữ liệu từ CSV bang).
+2. **Texas** — CSV + API sẵn; California để sau khi Texas chứng minh được traffic.
+3. **Stack FarmDirect: Next.js 14 + TypeScript + Supabase/PostgreSQL + GitHub + Vercel + Cloudflare + GoDaddy.** KHÔNG dùng Astro + VPS/Coolify: (a) Astro mặc định prerender tĩnh, muốn SSR phải thêm adapter + chạy Node server — danh bạ ~40k hồ sơ cần SSR thật để Google đọc được (bài học FarmDirect); (b) VPS Mỹ là chi phí hàng tháng, vi phạm quy tắc $0, trong khi GoDaddy + Supabase + Vercel free đã có sẵn; (c) ETL, schema Supabase, sitemap, mẫu trang geo của FarmDirect port trực tiếp sang Next.js. Code/deploy vẫn cần anh Út duyệt. Chi tiết xem `docs/spec-mvp-texas.md` §2.
+4. **Tên miền: CHƯA CHỐT** — repo đã có (utne1991/House-Craft-Pros); đề xuất tên miền riêng, không dùng subdomain hubercenter để tránh trộn thương hiệu thuế. Owner quyết sau.
 
 ## 8. Việc chưa rõ — đợt 2 (sau khi Owner quyết GO)
 

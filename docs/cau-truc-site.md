@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Stack (đề xuất — cần anh Út duyệt khi tới bước code/deploy)
+## 1. Stack (ĐÃ CHỐT 24/11/2026 — code/deploy vẫn cần anh Út duyệt)
 
 | Lớp | Lựa chọn | Vì sao |
 |---|---|---|
@@ -17,6 +17,8 @@
 
 **Không dùng:** Google AI Studio làm production (không có SSR/SSG, custom domain bắt buộc paid GCP
 ~$14,40/năm → vi phạm $0). Chỉ dùng để prototype/demo rồi port UI sang Next.js.
+Cũng **không dùng Astro + VPS/Coolify** (đã chốt 24/11 — xem `docs/spec-mvp-texas.md` §2):
+Astro mặc định prerender tĩnh, SSR cần adapter + Node server; VPS tốn phí hàng tháng, vi phạm $0.
 Chi tiết xem `research/raw/05-stack.md`.
 
 ---
