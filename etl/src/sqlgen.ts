@@ -138,9 +138,12 @@ export function writeStagingFiles(
       );
     }
   }
-  writeFileSync(join(dir, "licenses.tsv"), licLines.join("\n") + "\n", "utf8");
-  writeFileSync(join(dir, "businesses.tsv"), bizLines.join("\n") + "\n", "utf8");
-  writeFileSync(join(dir, "dedupe.tsv"), dedupeLines.join("\n") + "\n", "utf8");
+  // An empty file (not a lone newline) when there are no rows: COPY rejects
+  // a single empty line as a row with missing columns. Reachable when a run
+  // has zero dedupe decisions (Sprint 02: elec-reuse fixture run).
+  writeFileSync(join(dir, "licenses.tsv"), licLines.length ? licLines.join("\n") + "\n" : "", "utf8");
+  writeFileSync(join(dir, "businesses.tsv"), bizLines.length ? bizLines.join("\n") + "\n" : "", "utf8");
+  writeFileSync(join(dir, "dedupe.tsv"), dedupeLines.length ? dedupeLines.join("\n") + "\n" : "", "utf8");
   return {
     businessCount: businesses.length,
     decisionCount: decisions.length,
@@ -275,7 +278,22 @@ SELECT sb.business_id, sb.name, sb.normalized_name, sb.phone, sb.phone_normalize
   (SELECT loc.id FROM locations loc WHERE loc.state_code = sb.state_code AND loc.county_name = sb.county AND loc.city_name IS NOT DISTINCT FROM sb.city LIMIT 1),
   sb.dedupe_status, (SELECT run_id FROM ctx), (SELECT run_id FROM ctx)
 FROM stg_biz sb
-WHERE NOT EXISTS (SELECT 1 FROM biz_map m WHERE m.business_key = sb.business_key);
+WHERE NOT EXISTS (SELECT 1 FROM biz_map m WHERE m.business_key = sb.business_key)
+  -- Sprint 02: only insert a business row when at least one license with
+  -- this business_key is NEW in this run. Otherwise (every license already
+  -- exists and keeps its previous business per Dd6) the row would be an
+  -- orphan: no license ever references it. This bites on a re-run of a new
+  -- file version when a business has no phone/address evidence (so the
+  -- reuse JOIN above cannot match it) — e.g. a held_ambiguous business.
+  AND EXISTS (
+    SELECT 1 FROM stg_lic s
+    WHERE s.business_key = sb.business_key
+      AND NOT EXISTS (
+        SELECT 1 FROM licenses l
+        WHERE l.source_id = (SELECT source_id FROM ctx)
+          AND l.license_type = s.license_type AND l.license_number = s.license_number
+      )
+  );
 
 INSERT INTO biz_map (business_key, business_id)
 SELECT sb.business_key, sb.business_id FROM stg_biz sb
@@ -385,6 +403,56 @@ SELECT (SELECT run_id FROM ctx), d.cluster_key,
 FROM stg_dedupe d
 JOIN licenses l ON l.source_id = (SELECT source_id FROM ctx) AND l.license_type = d.license_type AND l.license_number = d.license_number
 GROUP BY d.cluster_key, d.decision, d.rationale, d.business_key;
+
+-- R-10 (Sprint 02): log cross-run business reuse as dedupe decisions, so
+-- every business merge is traceable. A reuse is a biz_map row whose
+-- business_id is an EXISTING business (not one of this run's new stg_biz
+-- business_ids). license_ids = all licenses now in the business (the
+-- existing ones + the new ones from this run). Skipped when the same
+-- business_key was already merged in-run this run (the US3 row above
+-- covers it) — in that case the US3 row's license_ids are extended below
+-- to cover the reused licenses too, so the decision still traces the
+-- whole merge. Also skipped when no new license from this run joined
+-- the business.
+INSERT INTO dedupe_decisions (run_id, cluster_key, license_ids, business_id, decision, rationale, decided_by)
+SELECT (SELECT run_id FROM ctx), sb.normalized_name,
+  (SELECT array_agg(l2.id ORDER BY l2.license_number) FROM licenses l2 WHERE l2.business_id = m.business_id),
+  m.business_id, 'merged',
+  'cross-source reuse from ' || ${code} || ': new license(s) matched an existing business on normalized name + phone/address evidence (same rule as in-run dedupe); recorded for traceability (R-10).',
+  'etl'
+FROM biz_map m
+JOIN stg_biz sb ON sb.business_key = m.business_key
+WHERE NOT EXISTS (SELECT 1 FROM stg_biz sb2 WHERE sb2.business_id = m.business_id)
+  -- A license counts as "new in this run" only if it was NOT in lic_before
+  -- (the pre-load snapshot). ingestion_run_id alone is not enough: the
+  -- UPDATE path rewrites it for pre-existing licenses too.
+  AND EXISTS (
+    SELECT 1 FROM licenses l
+    WHERE l.business_id = m.business_id
+      AND l.ingestion_run_id = (SELECT run_id FROM ctx)
+      AND NOT EXISTS (SELECT 1 FROM lic_before b WHERE b.id = l.id)
+  )
+  AND (SELECT count(*) FROM licenses l2 WHERE l2.business_id = m.business_id) >= 2
+  AND NOT EXISTS (SELECT 1 FROM dedupe_decisions dd WHERE dd.run_id = (SELECT run_id FROM ctx) AND dd.cluster_key = sb.normalized_name AND dd.decision = 'merged');
+
+-- R-10 guard case: the reuse was skipped because this run already merged
+-- the cluster in-run — extend that decision's license_ids to the whole
+-- business, so the one decision row traces the whole merge.
+UPDATE dedupe_decisions dd SET license_ids = (
+  SELECT array_agg(l2.id ORDER BY l2.license_number) FROM licenses l2 WHERE l2.business_id = dd.business_id
+)
+FROM biz_map m
+JOIN stg_biz sb ON sb.business_key = m.business_key
+WHERE dd.run_id = (SELECT run_id FROM ctx)
+  AND dd.decision = 'merged'
+  AND dd.cluster_key = sb.normalized_name
+  AND NOT EXISTS (SELECT 1 FROM stg_biz sb2 WHERE sb2.business_id = m.business_id)
+  AND EXISTS (
+    SELECT 1 FROM licenses l
+    WHERE l.business_id = m.business_id
+      AND l.ingestion_run_id = (SELECT run_id FROM ctx)
+      AND NOT EXISTS (SELECT 1 FROM lic_before b WHERE b.id = l.id)
+  );
 
 -- Audit: business-name fallback to holder name is recorded, not hidden (L11).
 INSERT INTO audit_logs (actor, action, table_name, record_id, new_values, run_id)

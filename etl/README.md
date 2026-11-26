@@ -15,10 +15,14 @@ cd etl
 node src/run.ts --all                    # all 3 sources, in order
 node src/run.ts --source tdlr-electrical # one source
 node src/run.ts --source tsbpe-rmp --file /path/to/rmp_download  # local file fallback
-node src/verify.ts                       # 12 post-load checks
+node src/verify.ts                       # 13 post-load checks
 node src/crosscheck.ts                   # 100-sample field-by-field cross-check
 node src/backup.ts                       # pg_dump -Fc + restore verification
-npm test                                 # full test suite (see below)
+npm test                                 # full test suite: 84 tests (see below)
+node src/lookup-cli.ts --license 1001 --trade plumbing   # look up one license (read-only)
+node src/lookup-cli.ts --name "SMITH PLUMBING LLC"       # look up by business name
+node src/review-cli.ts --list [--limit 50]                # held clusters awaiting human review
+node src/review-cli.ts --decide "held merge llc" --decision merge --by owner [--confirm]
 ```
 
 The driver writes per-source staging under `/tmp/hcp-etl/` (downloaded CSVs,
@@ -70,6 +74,19 @@ Note: the in-run dedupe partitions 43,976 licenses into 43,895 businesses;
 the loader's cross-source business reuse (same evidence rule) merges a
 further 58, so the database holds 43,837 businesses after the dry-run.
 
+**Sprint 02 (R-10):** every reuse merge is now logged as a `dedupe_decisions`
+row (decision `merged`, rationale `cross-source reuse from <source> ...`,
+`license_ids` = all licenses now in the business) — see `sqlgen.ts` and
+`docs/architecture/etl-pipeline.md` §8. The one case with no separate reuse
+row is a cluster already merged in-run this run: the loader extends that
+decision's `license_ids` to the whole business instead. The Sprint 02
+rebuild logs 57 reuse rows; the 58th multi-source business (GTG AUTOMATION
+INC) is covered by its extended in-run decision. Also fixed in Sprint 02:
+re-running a new file version no longer inserts an orphan business row for
+licenses that already exist (verified by a new `verify.ts` check, "no orphan
+businesses"), and an empty `dedupe.tsv` (a run with zero dedupe decisions)
+no longer breaks the COPY load.
+
 ## Status / verification split
 
 - TDLR rows have **no status field**: `license_status` is inferred from the
@@ -111,7 +128,9 @@ lists the test files explicitly; see `package.json`.)
 |---|---|---|---|
 | Unit | `tests/csv.test.ts`, `tests/normalize.test.ts`, `tests/validate-dedupe-anomaly.test.ts` | 50 | CSV parser (BOM/CRLF/quoted fields), TDLR + RMP normalization, status/verification split, dedupe rules incl. split clusters, anomaly thresholds, L1/L8 validation, invariant I1 |
 | Contract | `tests/contract.test.ts` | 11 | Sample normalized records validate against `contract/normalized-record.v1.json` (Python `jsonschema` is the validation oracle — see below); missing fields fail; I1 enforced; bad checksum fails; unknown field fails; v2 record fails v1 schema; old v1 records validate against v1.1; new optional-field record validates against v1.1 but not v1; loader rejects unknown versions |
-| DB | `tests/db.test.ts` | 7 | Real Postgres scratch DB (`housecraftpros_test`, created from the real migrations, loaded via the real driver) with 21-row RMP fixtures v1/v2: idempotency, disappeared handling, status change, unchanged-record no-history, rollback atomicity, backup/restore, round-trip |
+| DB | `tests/db.test.ts` | 9 | Real Postgres scratch DB (`housecraftpros_test`, created from the real migrations, loaded via the real driver) with 21-row RMP fixtures v1/v2: idempotency, disappeared handling, status change, unchanged-record no-history, rollback atomicity, backup/restore, round-trip — plus Sprint 02: cross-source reuse is logged as a dedupe decision (R-10), reuse + in-run merge of the same cluster extends the decision, no orphan business on a re-run of a new file version |
+| Lookup | `tests/lookup.test.ts` | 7 | Sprint 02 Verify data layer on a scratch DB: active / expired / suspended (synthetic row) / not found / duplicate name (ambiguous) / name + trade filter; status and verification never collapsed; no "Verified" label |
+| Review | `tests/review.test.ts` | 7 | Sprint 02 held-cluster review workflow on a scratch DB: list/show, dry-run plan changes nothing, merge moves licenses + removes the emptied business with an audit row, keep-separate records one decision, re-deciding throws, --by required |
 
 **Contract validation oracle:** the ETL itself stays zero-dependency; the
 tests shell out to Python `jsonschema` (installed on the VM) via
@@ -146,9 +165,13 @@ etl/
     anomaly.ts    pure threshold checks
     pg.ts       psql bridge (su postgres, temp-file queries)
     sqlgen.ts   COPY TSV + one-transaction run.sql per source
-    verify.ts   12 post-load checks
+    verify.ts   13 post-load checks (incl. Sprint 02: no orphan businesses)
     backup.ts   pg_dump -Fc + tested restore
     crosscheck.ts 100-sample field-by-field cross-check vs source CSVs
+    lookup.ts   read-only Verify data layer (by license number / by name)
+    lookup-cli.ts  lookup CLI (prints LookupResult JSON)
+    review.ts   held-cluster review workflow (list/show/plan/merge/keep-separate)
+    review-cli.ts  review CLI (plan by default; --confirm executes)
   tests/        node:test suites (see table above)
   evidence/     cross-check evidence (pass/fail booleans + license numbers only, no PII)
   bench/        Rust-readiness benchmark (NON-PRODUCTION)

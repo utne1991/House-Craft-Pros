@@ -6,7 +6,7 @@
     "backup": "node src/backup.ts",
     "crosscheck": "node src/crosscheck.ts",
     "run": "node src/run.ts",
-    "test": "node --test tests/csv.test.ts tests/normalize.test.ts tests/validate-dedupe-anomaly.test.ts tests/contract.test.ts tests/db.test.ts",
+    "test": "node --test tests/csv.test.ts tests/normalize.test.ts tests/validate-dedupe-anomaly.test.ts tests/contract.test.ts tests/db.test.ts tests/lookup.test.ts tests/review.test.ts",
     "verify": "node src/verify.ts"
   },
   "type": "module",

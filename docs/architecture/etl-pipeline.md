@@ -276,3 +276,17 @@ but its Texas rules are not silently assumed for other sources).
   `cross-source reuse`) or an audit-log entry. Until then, do not present the
   58 as individually reviewed merges. Also recorded as risk R-10 in
   `docs/reports/sprint-01-dry-run.md` §11.
+- **Resolved in Sprint 02 (25/11/2026) — reuse merges are now logged.**
+  `etl/src/sqlgen.ts` inserts one `dedupe_decisions` row per cross-run reuse
+  (decision `merged`, rationale `cross-source reuse from <source> ...`,
+  `license_ids` = all licenses now in the business, `decided_by` = `etl`),
+  with guards: skipped when the same business key was already merged in-run
+  this run (the US3 row covers it — and the loader extends that row's
+  `license_ids` to the whole business, so the one decision still traces
+  the whole merge) and when no new license from this run joined the
+  business. A license counts as new only if it was absent from the
+  pre-load snapshot (`lic_before`): the UPDATE path rewrites
+  `ingestion_run_id` for pre-existing licenses too, so that column alone
+  cannot tell new from re-loaded. Covered by two DB tests in
+  `etl/tests/db.test.ts` ("cross-source reuse is logged as a dedupe
+  decision (R-10)" and "reuse + in-run merge of the same cluster ...").
