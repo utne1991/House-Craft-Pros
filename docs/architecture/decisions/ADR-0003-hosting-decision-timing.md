@@ -1,7 +1,6 @@
 # ADR-0003 — Commercial hosting budget must be decided BEFORE public production
 
-**Status:** proposed (becomes "accepted" only when the Owner accepts the PR that
-contains it)
+**Status:** accepted (25/11/2026)
 **Date:** 25/11/2026 · **Spec:** `docs/spec-mvp-texas-v2.md` §1, §2, §3, §11
 
 ## Context
@@ -58,4 +57,4 @@ chosen and funded the commercial hosting option. Experiment/validation work
 
 ## Status
 
-**proposed** — awaiting Owner acceptance of the Sprint 00 PR.
+**Accepted 25/11/2026.** Basis: the Owner approved spec v2 (conditional GO 24/11/2026) and authorised Sprint 01 and Sprint 02; the spec — including this rule — is on main. Note: accepting this ADR accepts the *rule* (the commercial hosting budget must be decided before public production); it does not pick a host or authorise spending. Flipped to accepted in Sprint 02.

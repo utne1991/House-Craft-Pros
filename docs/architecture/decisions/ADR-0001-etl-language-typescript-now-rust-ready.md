@@ -1,6 +1,6 @@
 # ADR-0001 — ETL in TypeScript now, designed for a future Rust backend
 
-**Status:** proposed
+**Status:** accepted (25/11/2026)
 **Date:** 25/11/2026
 **Sprint:** 01 — Data Foundation
 
@@ -81,4 +81,4 @@ Constraints on the decision:
 
 ## Status
 
-**Proposed.** Becomes `accepted` only when the Owner accepts the Sprint 01 PR.
+**Accepted 25/11/2026.** Condition met: the Owner accepted Sprint 01 PR #1 (merged 25/11/2026, commit 33fda85e, by Owner decision). Flipped to accepted in Sprint 02.

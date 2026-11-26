@@ -34,7 +34,7 @@
     }
   },
   "failures": [],
-  "generated_at": "2026-11-25T09:03:44.487Z",
+  "generated_at": "2026-11-25T17:21:31.486Z",
   "method": "Stratified sample (100) across trade x status; each sampled license compared field-by-field (license number/type/subtype, dates, status, verification, status source, holder, business name/phone/address/county, endorsements, insurance) against its re-parsed source CSV row. Business contact fields compared only for single-license businesses (merged businesses may legitimately carry a sibling's contact). No PII values in this file — pass/fail booleans only.",
   "sample_count": 100,
   "samples": [
@@ -218,7 +218,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "22902",
+      "license_number": "22903",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -249,7 +249,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "24206",
+      "license_number": "24211",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -280,7 +280,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "25497",
+      "license_number": "25504",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -311,7 +311,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "26725",
+      "license_number": "26731",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -342,7 +342,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "27865",
+      "license_number": "27867",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -373,7 +373,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "29013",
+      "license_number": "29015",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -404,7 +404,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "30091",
+      "license_number": "30096",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -435,7 +435,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "31118",
+      "license_number": "31123",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -466,7 +466,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "32014",
+      "license_number": "32016",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -497,7 +497,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "32935",
+      "license_number": "32939",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -528,7 +528,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "33774",
+      "license_number": "33775",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -590,7 +590,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "35442",
+      "license_number": "35440",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -683,7 +683,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "37737",
+      "license_number": "37738",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -714,7 +714,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "38381",
+      "license_number": "38382",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -745,7 +745,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "39013",
+      "license_number": "39015",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -776,7 +776,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "39608",
+      "license_number": "39611",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -807,7 +807,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "40173",
+      "license_number": "40175",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -838,7 +838,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "40708",
+      "license_number": "40710",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -869,7 +869,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "41192",
+      "license_number": "41195",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -900,7 +900,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "41637",
+      "license_number": "41640",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "active",
@@ -993,7 +993,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "27492",
+      "license_number": "27448",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "expired",
@@ -1055,7 +1055,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "34973",
+      "license_number": "34984",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "expired",
@@ -1086,7 +1086,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "37029",
+      "license_number": "37031",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "expired",
@@ -1148,7 +1148,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "39679",
+      "license_number": "39678",
       "license_type": "Electrical Contractor",
       "pass": true,
       "status": "expired",
@@ -1272,7 +1272,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "118109",
+      "license_number": "11812",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1303,7 +1303,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "124196",
+      "license_number": "12421",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1334,7 +1334,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "130596",
+      "license_number": "130597",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1365,7 +1365,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "13627",
+      "license_number": "136272",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1396,7 +1396,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "142764",
+      "license_number": "142765",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1427,7 +1427,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "148290",
+      "license_number": "148292",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1458,7 +1458,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "15460",
+      "license_number": "15462",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1489,7 +1489,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "161313",
+      "license_number": "161335",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1520,7 +1520,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "167405",
+      "license_number": "167408",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1582,7 +1582,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "20130",
+      "license_number": "20131",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1613,7 +1613,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "22141",
+      "license_number": "22142",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1644,7 +1644,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "24015",
+      "license_number": "24014",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1737,7 +1737,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "29073",
+      "license_number": "29076",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1768,7 +1768,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "31617",
+      "license_number": "31618",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1799,7 +1799,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "37774",
+      "license_number": "37763",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1892,7 +1892,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "6102",
+      "license_number": "61063",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1923,7 +1923,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "69451",
+      "license_number": "69453",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -1954,7 +1954,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "78669",
+      "license_number": "7866",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "active",
@@ -2078,7 +2078,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "12409",
+      "license_number": "124024",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "expired",
@@ -2109,7 +2109,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "143255",
+      "license_number": "14325",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "expired",
@@ -2140,7 +2140,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "1775",
+      "license_number": "17709",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "expired",
@@ -2202,7 +2202,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "29133",
+      "license_number": "29104",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "expired",
@@ -2264,7 +2264,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "76801",
+      "license_number": "76838",
       "license_type": "A/C Contractor",
       "pass": true,
       "status": "expired",
@@ -2357,7 +2357,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "16973",
+      "license_number": "16970",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2388,7 +2388,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "18687",
+      "license_number": "18685",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2419,7 +2419,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "23379",
+      "license_number": "23296",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2450,7 +2450,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "36697",
+      "license_number": "36696",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2512,7 +2512,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "38350",
+      "license_number": "38352",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2543,7 +2543,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "39156",
+      "license_number": "39158",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2574,7 +2574,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "39986",
+      "license_number": "39994",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2605,7 +2605,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "40801",
+      "license_number": "40805",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2636,7 +2636,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "41560",
+      "license_number": "41569",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2667,7 +2667,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "42267",
+      "license_number": "42272",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2698,7 +2698,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "42946",
+      "license_number": "42954",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2729,7 +2729,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "43657",
+      "license_number": "43663",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2760,7 +2760,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "44320",
+      "license_number": "44327",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2791,7 +2791,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "44987",
+      "license_number": "44990",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2822,7 +2822,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "45614",
+      "license_number": "45615",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2853,7 +2853,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "46373",
+      "license_number": "46375",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2884,7 +2884,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "47174",
+      "license_number": "47178",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "active",
@@ -2946,7 +2946,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "14615",
+      "license_number": "14595",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",
@@ -2977,7 +2977,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "18448",
+      "license_number": "18384",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",
@@ -3008,7 +3008,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "36605",
+      "license_number": "36552",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",
@@ -3039,7 +3039,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "39301",
+      "license_number": "39258",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",
@@ -3070,7 +3070,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "41199",
+      "license_number": "41151",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",
@@ -3101,7 +3101,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "42931",
+      "license_number": "42828",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",
@@ -3132,7 +3132,7 @@
         "insurance_expiry_date": true,
         "endorsements": true
       },
-      "license_number": "44821",
+      "license_number": "44725",
       "license_type": "Responsible Master Plumber",
       "pass": true,
       "status": "expired",

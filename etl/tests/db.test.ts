@@ -43,10 +43,10 @@ function count(table: string, where = ""): number {
   return Number(psqlTest(`SELECT count(*) FROM ${table}${where ? ` WHERE ${where}` : ""};`));
 }
 
-function runEtl(file: string): { status: number | null; stderr: string; stdout: string } {
+function runEtl(file: string, source = "tsbpe-rmp"): { status: number | null; stderr: string; stdout: string } {
   const r = spawnSync(
     "node",
-    ["src/run.ts", "--source", "tsbpe-rmp", "--file", file, "--staging", STAGING],
+    ["src/run.ts", "--source", source, "--file", file, "--staging", STAGING],
     { cwd: ETL_DIR, encoding: "utf8", env: { ...process.env, HCP_DB: TEST_DB } },
   );
   return { status: r.status, stderr: r.stderr ?? "", stdout: r.stdout ?? "" };
@@ -172,6 +172,101 @@ describe("database load (scratch DB, fixture CSVs)", () => {
       1,
     );
     assert.equal(count("license_status_history"), 23);
+    // Sprint 02: no orphan business rows — re-running a new file version
+    // must not duplicate the held business of an already-loaded license.
+    assert.equal(count("businesses"), 20);
+    assert.equal(
+      Number(
+        psqlTest(
+          `SELECT count(*) FROM businesses b WHERE NOT EXISTS (SELECT 1 FROM licenses l WHERE l.business_id = b.id);`,
+        ),
+      ),
+      0,
+    );
+  });
+
+  it("cross-source reuse is logged as a dedupe decision (R-10)", () => {
+    // 90001 is an electrical license for SMITH PLUMBING LLC with the same
+    // phone/address as the RMP business of 1001/1002: the loader must reuse
+    // that business AND record the merge as a dedupe decision. 90002 is a
+    // control: a brand-new business, no reuse row.
+    const r = runEtl(join(FIXTURES, "elec-reuse.csv"), "tdlr-electrical");
+    assert.equal(r.status, 0, r.stderr);
+    assert.equal(count("licenses"), 23);
+    assert.equal(count("businesses"), 21);
+    assert.equal(count("ingestion_runs"), 3);
+    // Exactly one reuse decision, for the SMITH PLUMBING LLC business.
+    assert.equal(
+      count("dedupe_decisions", `decision = 'merged' AND rationale LIKE 'cross-source reuse%'`),
+      1,
+    );
+    assert.equal(
+      Number(
+        psqlTest(
+          `SELECT count(*) FROM dedupe_decisions d WHERE d.decision = 'merged' AND d.rationale LIKE 'cross-source reuse%' AND d.business_id = (SELECT business_id FROM licenses WHERE license_number = '1001') AND (SELECT id FROM licenses WHERE license_number = '1001') = ANY(d.license_ids) AND (SELECT id FROM licenses WHERE license_number = '90001') = ANY(d.license_ids);`,
+        ),
+      ),
+      1,
+    );
+    // The reused business now holds licenses from both sources.
+    assert.equal(
+      Number(
+        psqlTest(
+          `SELECT count(DISTINCT source_id) FROM licenses WHERE business_id = (SELECT business_id FROM licenses WHERE license_number = '90001');`,
+        ),
+      ),
+      2,
+    );
+    // The control license got its own new business, with no reuse row.
+    assert.equal(
+      Number(
+        psqlTest(
+          `SELECT count(DISTINCT business_id) FROM licenses WHERE license_number IN ('90001','90002');`,
+        ),
+      ),
+      2,
+    );
+    // Re-running the same electrical file is a no-op and logs no second row.
+    const r2 = runEtl(join(FIXTURES, "elec-reuse.csv"), "tdlr-electrical");
+    assert.equal(r2.status, 0, r2.stderr);
+    assert.match(r2.stdout, /duplicate_noop/);
+    assert.equal(
+      count("dedupe_decisions", `decision = 'merged' AND rationale LIKE 'cross-source reuse%'`),
+      1,
+    );
+  });
+
+  it("reuse + in-run merge of the same cluster: one decision row covers the whole merge (R-10 guard)", () => {
+    // 90005 + 90006 are two electrical licenses for REUSE CONTROL LLC (the
+    // business 90002 created in the previous test): they merge in-run AND
+    // reuse that business. No second 'cross-source reuse' row is logged;
+    // instead the in-run merged decision's license_ids are extended to the
+    // whole business (90002 + 90005 + 90006).
+    const r = runEtl(join(FIXTURES, "elec-reuse-guard.csv"), "tdlr-electrical");
+    assert.equal(r.status, 0, r.stderr);
+    assert.equal(count("licenses"), 25);
+    assert.equal(count("businesses"), 21);
+    assert.equal(count("ingestion_runs"), 4);
+    assert.equal(
+      count("dedupe_decisions", `decision = 'merged' AND rationale LIKE 'cross-source reuse%'`),
+      1,
+    );
+    assert.equal(
+      Number(
+        psqlTest(
+          `SELECT cardinality(license_ids) FROM dedupe_decisions WHERE decision = 'merged' AND cluster_key = 'reuse control llc';`,
+        ),
+      ),
+      3,
+    );
+    assert.equal(
+      Number(
+        psqlTest(
+          `SELECT count(*) FROM dedupe_decisions d WHERE d.decision = 'merged' AND d.cluster_key = 'reuse control llc' AND (SELECT id FROM licenses WHERE license_number = '90002') = ANY(d.license_ids) AND (SELECT id FROM licenses WHERE license_number = '90005') = ANY(d.license_ids) AND (SELECT id FROM licenses WHERE license_number = '90006') = ANY(d.license_ids);`,
+        ),
+      ),
+      1,
+    );
   });
 
   it("rollback: a failed transaction changes nothing (L7)", () => {

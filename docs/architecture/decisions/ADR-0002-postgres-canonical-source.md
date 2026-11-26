@@ -1,6 +1,6 @@
 # ADR-0002 — PostgreSQL is the canonical source; stand-ins are stand-ins
 
-**Status:** proposed
+**Status:** accepted (25/11/2026)
 **Date:** 25/11/2026
 **Sprint:** 01 — Data Foundation
 
@@ -66,4 +66,4 @@ contracts, and tests target, and what status any stand-in has.
 
 ## Status
 
-**Proposed.** Becomes `accepted` only when the Owner accepts the Sprint 01 PR.
+**Accepted 25/11/2026.** Condition met: the Owner accepted Sprint 01 PR #1 (merged 25/11/2026, commit 33fda85e, by Owner decision). Flipped to accepted in Sprint 02.

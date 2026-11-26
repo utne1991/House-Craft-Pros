@@ -1,7 +1,6 @@
 # ADR-0004 — Cloudflare Workers (OpenNext) vs Vercel Pro for full-stack Next.js hosting
 
-**Status:** proposed (becomes "accepted" only when the Owner accepts the PR that
-contains it)
+**Status:** accepted (25/11/2026)
 **Date:** 25/11/2026 · **Spec:** `docs/spec-mvp-texas-v2.md` §2.2
 **Research date:** 25/11/2026 — documentation research only; **no trial deploy
 was performed**, so this ADR records a conditional recommendation, not a proven
@@ -74,4 +73,4 @@ ISR/cache behaviour on Workers are all unmeasured for this codebase.
 
 ## Status
 
-**proposed** — awaiting Owner acceptance of the Sprint 00 PR.
+**Accepted 25/11/2026.** Basis: as ADR-0003 — the Owner approved spec v2 (conditional GO 24/11/2026) and authorised Sprint 01 and Sprint 02. Note: this ADR remains a conditional recommendation from documentation research only (no trial deploy performed); the final host choice is still the Owner's, before public production (ADR-0003). Flipped to accepted in Sprint 02.

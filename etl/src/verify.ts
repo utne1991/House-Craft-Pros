@@ -69,6 +69,14 @@ async function main(): Promise<void> {
   );
   checks.push({ detail: `${orphans.n} orphan licenses`, name: "every license has a business", pass: orphans.n === 0 });
 
+  // No orphan businesses: every business row holds >= 1 license. (Sprint 02:
+  // a re-run of a new file version used to insert a duplicate business row
+  // for licenses that already existed — see sqlgen.ts.)
+  const orphanBiz = await one<{ n: number }>(
+    `SELECT count(*)::int AS n FROM businesses b WHERE NOT EXISTS (SELECT 1 FROM licenses l WHERE l.business_id = b.id)`,
+  );
+  checks.push({ detail: `${orphanBiz.n} businesses with zero licenses`, name: "no orphan businesses", pass: orphanBiz.n === 0 });
+
   // History: every license has an initial_load row; no license has zero rows.
   const noHistory = await one<{ n: number }>(
     `SELECT count(*)::int AS n FROM licenses l WHERE NOT EXISTS (SELECT 1 FROM license_status_history h WHERE h.license_id = l.id AND h.change_reason = 'initial_load')`,
